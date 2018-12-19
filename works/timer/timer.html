@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>Timer</title>
+        <link rel="stylesheet" href="reset.css">
+        <link rel="stylesheet" href="style.css">
+        <script>
+        var interval_id;
+        var start_flag = false;
+        var timeToCountDown = 180;
+        
+        //timeToCountDownを分・秒に直して表示
+        function set_time(){
+            var sec = timeToCountDown % 60 ;
+            var min = Math.floor(timeToCountDown / 60) ;
+            var addZero_sec = ("00"+ sec ).slice(-2);
+            var addZero_min = ("00"+ min ).slice(-2);
+            var timer = document.getElementById('timer');
+            timer.innerHTML = addZero_min + ' : ' + addZero_sec ;
+        }
+        
+        //スタートボタンを押した時に実行される関数
+        function start_countDown(){
+            if (start_flag === false) {
+       　　　　　// 1秒ごとにcountDownを実行
+       　　　　　interval_id = setInterval(countDown, 1000);
+       　　　　　//ボタンの色を暗く
+       　　　　　var start = document.getElementById('start');
+       　　　　　start.style.backgroundColor = '#808080';
+       　　　　　start.style.color = '#696969';
+       　　　　　//フラグを戻す
+       　　　　　start_flag = true;
+       　　  }
+        } 
+        
+        function countDown(){
+            if(timeToCountDown > 1){
+                //残り時間の計算
+                timeToCountDown = timeToCountDown - 1;
+                //timeToCountDownを分・秒に直す
+                set_time();
+                }else{
+                    //0になったらタイムアップ
+                    var timeUp = document.getElementById('timer');
+                    timeUp.innerHTML = "Time Up!"
+                    timeUp.style.color = "red";
+                    //タイマーを止める
+                    clearInterval(interval_id);
+                    //フラグ変更
+                    start_flag = false;
+                    //スタートボタンの色を戻す
+                    var start = document.getElementById('start')
+                    start.style.backgroundColor = '#f5f5f5';
+                    start.style.color = '#000';
+                }
+        }
+ 
+        //ストップボタンを押した時に実行される関数
+        function stop_countDown(){
+                clearInterval(interval_id);
+                start_flag = false;
+                //スタートボタンの色を戻す
+                var start = document.getElementById('start')
+                start.style.backgroundColor = '#f5f5f5';
+                start.style.color = '#000';
+            }
+        //リセットボタンを押した時に実行される関数
+        function reset_countDown(){
+            //動作停止
+            clearInterval(interval_id);
+            //秒数をスタート状態に戻す
+            timeToCountDown = 180;
+            //timeToCountDownを分・秒に直して表示
+            set_time();
+            //文字色を黒に戻す
+            timer.style.color = "#000";
+            //フラグを戻す
+            start_flag = false;
+            //スタートボタンの色を戻す
+            var start = document.getElementById('start')
+            start.style.backgroundColor = '#f5f5f5';
+            start.style.color = '#000';
+        }
+            
+        window.onload = function() {
+        //最初の時点で「０３：００」表示
+        set_time();
+        //各ボタンのクリック時の動作
+        var start = document.getElementById('start');
+        start.addEventListener('click', start_countDown, false);
+        var stop = document.getElementById('stop');
+        stop.addEventListener('click', stop_countDown, false);
+        var reset = document.getElementById('reset');
+        reset.addEventListener('click', reset_countDown, false);
+   }
+        </script>
+    </head>
+    <body>
+        <header>
+            <h1>JavaScript/カウントダウンタイマー</h1>
+        </header>
+        <div id = "wrapper">
+            <p id = "timer"></p>
+            <div id = button-wrapper>
+                <button id = "start" class="square_btn">スタート</button>
+                <button id = "stop" class="square_btn">ストップ</button>
+                <button id = "reset" class="square_btn">リセット</button>
+            </div>
+        </div>
+        <section class="description">
+            <p></p>
+        </section>
+    </body>
+</html>

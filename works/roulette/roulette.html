@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+   <meta charset="UTF-8">
+   <title>ルーレット</title>
+   <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Old+Standard+TT:700" rel="stylesheet">
+   <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+   <script>
+    var interval_id;
+    var cnt = 1;//マス目の数字
+    var stock = [];//マス目（1~16）の配列
+    var num = 16;//乱数の数　ストップするたびに1ずつ減って行く
+    var td_id;//取得した乱数をキープする箱
+
+    //スタート時の処理
+    function start_roulette(){
+        console.log(stock);
+        //１秒秒ごとにrouletteを動かす
+        interval_id = setInterval(roulette,100);
+        //スタートボタンを押せなくする
+        $('#start').prop('disabled', true);
+        $('#stop').prop('disabled', false);
+    }
+    
+    function roulette(){
+        //直前で選ばれた背景色を消す
+        $('td').removeClass('select');
+        //選択済みのマス目に色をつける
+        $('.confirm').css({
+           'background-color':'#f7d6aa' ,
+           'color':'#ada8a1'
+        });
+        //配列'stock'内のindex番号（0~15）をランダムに求める
+        td_id = Math.floor( Math.random() * num ) ;
+        //ランダムに背景色をつけるクラスを追加する
+        $('#td_'+stock[td_id]).addClass('select');
+    }
+    
+    //ストップ時の処理
+    function stop_roulette(){
+        clearInterval(interval_id);
+        //ストップ時に'select'クラス削除
+        $('td').removeClass('select');
+        //ストップ時に選ばれたマス目にクラス追加
+        $('#td_'+stock[td_id]).addClass('confirm');
+        //乱数の取得数を減らす
+        num--;
+        //選択済みの数字を配列の末尾（対象外）へ移動
+        var swap = stock[num];
+        stock[num] = stock[td_id];
+        stock[td_id] = swap;
+        //ボタンを有効化
+        $('#start').prop('disabled', false);
+        //１６回目以降はスタートボタンを押せなくする
+        if( num === 0 ){
+            $('#start').prop('disabled', true);
+        };
+        $('#stop').prop('disabled', true);
+    }
+    
+    //リセット時の処理
+    function reset_roulette(){
+        clearInterval(interval_id);
+        //ボタンを有効化
+        $('#start').prop('disabled', false);
+        //numを初期化
+        num = 16;
+        //cnt初期化
+        cnt = 1;
+        //配列を初期化
+        stock = [];
+        //マス目削除
+        $('table').empty();
+        //マス目再作成
+        masume();
+        $('#stop').prop('disabled', true);
+    }
+    
+    //マス目生成
+    function masume(){
+        for(var i = 1; i <= 4; i++){
+            //tr作成
+            $('#table').append('<tr id = "tr_'+ i +'"></tr>');
+            //td作成
+            for(var j = 1; j <= 4; j++){
+                $('#tr_' + i).append('<td id = td_' + cnt + '>' + cnt + '</td>');
+                stock.push(cnt);
+                cnt++;
+            }
+        }
+    }
+    
+    $(function() {
+        masume();
+        $('#start').click(start_roulette);
+        $('#stop').click(stop_roulette);
+        $('#reset').click(reset_roulette);
+        $('#stop').prop('disabled', true);
+   });
+   </script>
+</head>
+<body>
+    <header>
+        <h1>JavaScript/ルーレット</h1>
+    </header>
+    <section class="roulette">
+        <table id = 'table'>
+        </table>
+            <div id = button-wrapper>
+                <button id = "start">スタート</button>
+                <button id = "stop">ストップ</button>
+                <button id = "reset">リセット</button>
+            </div>
+    </section>
+</body>
+</html>

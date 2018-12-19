@@ -1,0 +1,309 @@
+@charset "UTF-8";
+
+html{
+    font-size:62.5%;
+}
+
+*,*::befor,*::after{
+    box-sizing:border-box;
+}
+
+body{
+    background:url(../images/pink_dott.jpg) ;
+    background-size:cover;
+    text-align:center;
+    margin:0px;
+    font-size:1.4rem;
+    font-family:'Noticia Text', "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+}
+
+ul{
+    list-style-type:none;
+}
+a:link, a:visited, a:hover, a:active{
+    text-decoration:none;
+}
+.clearfix:after{
+    content:"";
+    clear:both;
+    display:block;
+}
+.button{
+    display:inline-block;
+    width:200px;
+    text-decoration: none;
+    color:#696969;
+    border: solid 2px #696969;
+    border-radius: 3px;
+    transition: .4s;
+}
+.button:hover{
+    background:#ffb6c1;
+    color: white;
+}
+/*ヘッダー*/
+.header{
+    padding:100px 30px 130px;
+    margin-top:75px;
+}
+.site-title{
+    font-size:5rem;
+    text-shadow:2px 2px 5px rgba(13,13,13,0.46);
+    letter-spacing:0.4em;
+}
+.site-title-sub{
+    margin:30px 0 30px;
+    letter-spacing:1px;
+    font-size:2.2rem;
+    color:#696969;
+}
+.site-title-sub::before,
+.site-title-sub::after{
+    content:'';
+    display:inline-block;
+    width:100px;
+    height:2px;
+    margin:0 30px;
+    background-color:#c0c0c0;
+    vertical-align:middle;
+}
+
+.buttons .button{
+    width:200px;
+    padding:17px;
+    margin:10px;
+    letter-spacing:1px;
+    font-size:1.2rem;
+}
+/*ABOUT ME*/
+.about{
+    background-color:#fff;
+    padding-bottom:30px;
+}
+
+.heading{
+    position:relative;
+    display:inline-block;
+    margin:30px;
+    padding-bottom:15px;
+    letter-spacing:2px;
+    font-size:4rem;
+}
+.heading::before,
+.heading::after{
+    content:'';
+    position:absolute;
+    right:0;
+    bottom:0;
+    left:0;
+    border-bottom:1px solid #999;
+}
+.heading::before{
+    bottom:5px;
+}
+.about-text{
+    margin:20px 0;
+    padding:0 15px;
+    line-height:2.5;
+}
+/*WORKS*/
+.work-wrapper {
+    display: table;
+    width:960px;
+    table-layout:fixed;
+    margin: 0px auto 30px;
+}
+.work-box {
+    display:table-cell;
+}
+.work-image{
+    display:block;
+    width:268px;
+    margin:0 auto;
+}
+.work-text{
+    line-height:1.6;
+}
+.work-text .bold{
+    font-weight:bold;
+    font-size:3rem;
+}
+.work-box .button{
+    width:100px;
+    padding: 11px;
+    margin-top: 10px;
+}
+
+/*CONTACT*/
+.contact{
+    padding:30px 0;
+    background-color:#fff;
+}
+.contact-form{
+    width:50%;
+    margin:50px auto 0;
+}
+.contact-form input[type=text],
+.contact-form textarea{
+    display:block;
+    width:100%;
+    margin-bottom:10px;
+    padding:15px;
+    border:1px solid #696969;
+    border-radius:8px;
+    outline:none;
+}
+.contact-form textarea{
+    height:150px;
+}
+.contact-form .button{
+    display:block;
+    width:200px;
+    margin:40px auto 0;
+    padding:15px;
+    background-color: rgba(255,233,171,0.3);
+}
+.contact-form .button:hover{
+    background:#ffb6c1;
+}
+/*フッター*/
+.footer{
+    padding:30px 0;
+    font-size:1.3rem;
+}
+/*レスポンシブ*/
+@media(max-width: 841px){
+    .header{
+        margin-top:0;
+        padding: 50px 30px 100px;
+    }
+    .buttons .button{
+        display: block;
+        margin: 10px auto;
+    }
+}
+@media(max-width: 768px){
+    body{
+        font-size:1.5rem;
+        box-sizing: border-box;
+    }
+    /*ヘッダー*/
+    .header{
+        padding: 50px 30px 100px;
+    }
+    .site-title{
+        margin-top:25px;
+        font-size:4rem;
+        letter-spacing:0.3em;
+    }
+    .site-title-sub{
+        font-size:1.7rem;
+    }
+    .site-title-sub::before,
+    .site-title-sub::after {
+        display:block;
+        width:80%;
+        margin:10px auto;
+    }
+    .heading{
+        font-size:2.5rem;
+    }
+    /*about*/
+    .about-text{
+        margin:20px 0;
+        padding:0 15px;
+        line-height:2;
+    }
+    /*works*/
+    .work-wrapper,
+    .work-box{
+        display:block;
+        width:100%;
+        margin:auto;
+    }
+    .image{
+        width:60%;
+        float:left;
+        margin: 0 auto;
+    }
+    .work-image{
+        display: inline-block;
+        width: 80%;
+        margin-bottom:10px;
+    }
+    .text-box{
+        width: 40%;
+        float: right;
+        height: 231px;
+        margin: 20px 0;
+        font-size: 3rem;
+    }
+    .work-text{
+        display: inline-block;
+        box-sizing: border-box;
+        font-size: 1.8rem;
+    }
+   
+    .work-box .button {
+        display:none
+    }
+    /*contact*/
+    .contact-form{
+        width:80%;
+        margin: 10px auto 0;
+    }
+    .contact{
+        padding-bottom:80px;
+    }
+    .contact-form input[type=text],
+    .contact-form textarea {
+        width:80%;
+        margin: 16px auto 10px;
+    }
+    
+}
+@media(max-width: 700px){
+    /*works*/
+    .work-text .bold {
+        font-size: 2.5rem;
+    }
+    .work-text{
+        font-size: 1.3rem;
+    }
+    .text-box {
+        width: 40%;
+        float: right;
+        height: 200px;
+        margin: 10px 0;
+    }
+}
+@media(max-width: 500px){
+    /*works*/
+    .work-text .bold {
+        font-size: 2.3rem;
+    }
+    .work-text{
+        font-size: 1.2rem;
+    }
+    .text-box {
+        width: 40%;
+        float: right;
+        height: 140px;
+        margin: 10px 0;
+    }
+}
+@media(max-width: 400px){
+    /*works*/
+    .work-text .bold {
+        font-size: 2rem;
+    }
+    .work-text{
+        font-size: 1.1rem;
+    }
+    .text-box {
+        width: 40%;
+        float: right;
+        height: 110px;
+        margin: 10px 0;
+    }
+}
